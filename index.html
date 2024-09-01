@@ -9,8 +9,8 @@
       margin: 0;
       padding: 0;
       width: 100%;
-      height: 100%;
-      overflow: hidden;
+      height: 200vh; /* Extra height to enable scrolling */
+      overflow-x: hidden;
     }
 
     #backgroundVideo {
@@ -23,7 +23,7 @@
       z-index: 0;
     }
 
-    #stopButton {
+    #scrollButton {
       position: fixed;
       bottom: 20px;
       left: 50%;
@@ -35,33 +35,50 @@
       border: none;
       cursor: pointer;
       z-index: 1001;
+      display: none;
     }
   </style>
 </head>
 <body>
   <!-- Background Video -->
-  <video id="backgroundVideo" autoplay loop muted playsinline>
-    <source src="video/IMG_7123.mp4" type="video/mp4">
+  <video id="backgroundVideo" muted autoplay loop playsinline>
+    <source src="https://angelsheri.github.io/Testrepo/video/IMG_7123.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
-  <!-- Stop Button -->
-  <button id="stopButton">STOP the Audio</button>
+  <!-- Button to Enable Sound -->
+  <button id="scrollButton">Play Video with Sound</button>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const backgroundVideo = document.getElementById('backgroundVideo');
-      const stopButton = document.getElementById('stopButton');
+      const scrollButton = document.getElementById('scrollButton');
+      let videoPlayedWithSound = false; // Flag to ensure video plays with sound only once
 
-      // Automatically play video and mute it
+      // Initially, play the video muted
       backgroundVideo.play();
 
-      stopButton.addEventListener('click', function() {
-        // Unmute the video when button is clicked
-        backgroundVideo.muted = !backgroundVideo.muted;
-        // Optional: Redirect to your specified link
-        window.location.href = 'https://a.co/d/bPL7P3B';
-      });
+      // Function to enable sound and play video on minor scroll
+      function playVideoWithSound() {
+        if (!videoPlayedWithSound) { // Check if the video hasn't already played with sound
+          videoPlayedWithSound = true; // Set the flag to true
+          backgroundVideo.muted = false; // Unmute the video
+          backgroundVideo.play().catch(error => {
+            // If autoplay with sound is blocked, show a button to enable sound
+            scrollButton.style.display = 'block';
+            scrollButton.addEventListener('click', function() {
+              backgroundVideo.play();
+              scrollButton.style.display = 'none'; // Hide button after playing
+            });
+          });
+        }
+      }
+
+      // Listen for scroll events
+      window.addEventListener('scroll', function() {
+        playVideoWithSound(); // Call function on any scroll event
+      }, { once: true }); // Use { once: true } to remove the listener after the first scroll
+
     });
   </script>
 </body>
