@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Autoplay with Sound</title>
+  <title>Gavin Friday</title>
   <style>
     body, html {
       margin: 0;
@@ -23,52 +23,26 @@
       object-fit: cover;
       z-index: 0;
     }
-
-    #playButton {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 15px 30px;
-      font-size: 18px;
-      color: white;
-      background-color: red;
-      border: none;
-      cursor: pointer;
-      z-index: 1001;
-      display: none; /* Hidden initially */
-    }
   </style>
 </head>
 <body>
   <!-- Background Video -->
-  <video id="backgroundVideo" loop playsinline muted>
+  <video id="backgroundVideo" playsinline>
     <source src="video/IMG_7123.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
-  <!-- Play Button (Fallback for mobile browsers) -->
-  <button id="playButton">Play Video with Sound</button>
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const backgroundVideo = document.getElementById('backgroundVideo');
-      const playButton = document.getElementById('playButton');
 
-      // Try to play the video with sound
+      // Attempt to autoplay with sound
       backgroundVideo.muted = false; // Unmute the video
       backgroundVideo.play().then(() => {
-        console.log('Video is playing with sound.');
-      }).catch((error) => {
-        console.error('Autoplay with sound blocked:', error);
-        // Show play button if autoplay with sound is blocked
-        playButton.style.display = 'block';
-
-        // Add click event to the button
-        playButton.addEventListener('click', function() {
-          backgroundVideo.play();
-          playButton.style.display = 'none'; // Hide button after clicking
-        });
+        // Video is playing with sound
+        console.log('Video is playing with sound');
+      }).catch(error => {
+        console.error('Autoplay with sound failed', error);
       });
     });
   </script>
