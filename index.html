@@ -40,7 +40,7 @@
 </head>
 <body>
   <!-- Background Video -->
-  <video id="backgroundVideo" autoplay loop>
+  <video id="backgroundVideo" autoplay loop muted playsinline>
     <source src="video/IMG_7123.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
@@ -53,12 +53,13 @@
       const backgroundVideo = document.getElementById('backgroundVideo');
       const stopButton = document.getElementById('stopButton');
 
-      // Unmute the video and start playing
-      backgroundVideo.muted = false;
+      // Automatically play video and mute it
       backgroundVideo.play();
 
       stopButton.addEventListener('click', function() {
-        // Redirect to your specified link
+        // Unmute the video when button is clicked
+        backgroundVideo.muted = !backgroundVideo.muted;
+        // Optional: Redirect to your specified link
         window.location.href = 'https://a.co/d/bPL7P3B';
       });
     });
