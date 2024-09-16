@@ -1,50 +1,145 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gavin Friday</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: black;
-    }
+<div id="chat-widget-container"
+    style="position: relative; width: 100%; height: 100%; overflow: hidden; border: 1px solid #dfdfdf; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.09); border-radius: 7px;">
+    <chat-widget ack-icon="MessageDotsCircle" ack-placeholder-color="#000000FF" agency-name="" agency-website=""
+        allow-avatar-image="false" auto-country-code="true" chat-icon="messageSquare" chat-type="liveChat"
+        default-widget="true" enable-revisit-message="false" heading="Have any questions?" height="100%"
+        is-prompt-avatar-image-optimize="true"
+        legal-msg="By submitting you agree to receive SMS or e-mails for the provided channel. Rates may be applied."
+        live-chat-ack-msg="Your chat has ended" live-chat-end-msg="To start a new chat,"
+        live-chat-feedback-msg="Please rate your experience." live-chat-feedback-note="Thank you, for taking your time."
+        live-chat-intro-msg="Give us a minute to assign you the best person to help you out."
+        live-chat-user-inactive-msg="Looks like it's taking too long. Please leave your contact details. We will get back to you shortly"
+        live-chat-user-inactive-time="15" live-chat-visitor-inactive-msg="Chat closed due to user Inactivity"
+        live-chat-visitor-inactive-time="15" locale="en-us" location-id="LdcuiH328WKijRn8EJ4u" position="static"
+        primary-color="#188bf6" prompt-avatar="https://widgets.leadconnectorhq.com/chat-widget/assets/defaultAvatar.png"
+        prompt-avatar-alt-text="Avatar" prompt-msg="Hi there, have a question? Let's chat here!" prompt-type="normal"
+        resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+        revisit-prompt-msg="Welcome back {{ name }}, how can we help you today?" send-label="Send"
+        show-agency-branding="false" show-consent-checkbox="false" show-live-chat-welcome-msg="true" show-prompt="false"
+        src="https://widgets.leadconnectorhq.com/loader.js"
+        sub-heading="Hi there! Mary here. How can I help you today? Want info on our AI services, schedule a call, or get a free custom AI demo for your business?"
+        success-msg="One of our representatives will contact you shortly." thank-you-msg="Thank You!" width="100%"
+        theme="{
+            &quot;name&quot;: &quot;custom&quot;,
+            &quot;colors&quot;: {
+                &quot;chatBubbleColor&quot;: &quot;#3ECF8EFF&quot;,
+                &quot;backgroundColor&quot;: &quot;#FFFFFF&quot;,
+                &quot;headerColor&quot;: &quot;#1c1c1cFF&quot;,
+                &quot;buttonColor&quot;: &quot;#a84e15&quot;,
+                &quot;avatarBackgroundColor&quot;: &quot;#ffffff&quot;,
+                &quot;avatarBorderColor&quot;: &quot;#FFFFFFFF&quot;,
+                &quot;senderMessageColor&quot;: &quot;#a84e15&quot;,
+                &quot;receivedMessageColor&quot;: &quot;#edededFF&quot;
+            },
+            &quot;typography&quot;: {
+                &quot;fontFamily&quot;: &quot;Roboto&quot;,
+                &quot;colors&quot;: {
+                    &quot;senderMessageTextColor&quot;: &quot;#FFFFFFFF&quot;,
+                    &quot;receivedMessageTextColor&quot;: &quot;#000000FF&quot;,
+                    &quot;systemMessageTextColor&quot;: &quot;#000000FF&quot;,
+                    &quot;headerMessageTextColor&quot;: &quot;#FFFFFFFF&quot;,
+                    &quot;welcomeMessageTextColor&quot;: &quot;#000000FF&quot;
+                }
+            }
+        }"></chat-widget>
+</div>
 
-    #backgroundVideo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-    }
-  </style>
-</head>
-<body>
-  <!-- Background Video -->
-  <video id="backgroundVideo" playsinline>
-    <source src="video/IMG_7123.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+<script src="https://widgets.leadconnectorhq.com/loader.js"
+    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+    data-widget-id="66a7fe4e9fe0b459b86aabb7"></script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const backgroundVideo = document.getElementById('backgroundVideo');
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        function adjustChatWidget() {
+            let chatWidget = document.querySelector('chat-widget');
+            if (chatWidget && chatWidget.shadowRoot) {
+                let widgetElement = chatWidget.shadowRoot.querySelector('#lc_text-widget');
+                if (widgetElement) {
+                    // Make the widget fill the iframe and make it responsive
+                    widgetElement.style.position = 'absolute';
+                    widgetElement.style.top = '0';
+                    widgetElement.style.left = '0';
+                    widgetElement.style.width = '100%';
+                    widgetElement.style.height = '100%';
 
-      // Attempt to autoplay with sound
-      backgroundVideo.muted = false; // Unmute the video
-      backgroundVideo.play().then(() => {
-        // Video is playing with sound
-        console.log('Video is playing with sound');
-      }).catch(error => {
-        console.error('Autoplay with sound failed', error);
-      });
+                    // Hide the header
+                    let headerElement = chatWidget.shadowRoot.querySelector('.lc_text-widget_heading--root');
+                    if (headerElement) {
+                        headerElement.style.display = 'none';
+                    }
+
+                    // Hide the button and open the chat automatically
+                    let button = chatWidget.shadowRoot.querySelector('#lc_text-widget--btn');
+                    if (button) {
+                        button.click();
+                        button.style.display = 'none';
+                    }
+
+                    // Ensure the chat box fills the container and keeps the input area visible
+                    let boxElement = chatWidget.shadowRoot.querySelector('#lc_text-widget--box');
+                    if (boxElement) {
+                        boxElement.style.borderRadius = '7px';
+                        boxElement.style.overflow = 'hidden';
+                        boxElement.style.height = '100%';
+                        boxElement.style.maxHeight = '100%';
+                        boxElement.style.display = 'flex';
+                        boxElement.style.flexDirection = 'column';
+
+                        // Ensure the message area is scrollable and the input area stays visible
+                        let messageArea = chatWidget.shadowRoot.querySelector('.lc_text-widget_message-area--root');
+                        if (messageArea) {
+                            messageArea.style.flexGrow = '1';
+                            messageArea.style.overflowY = 'auto';
+                        }
+
+                        let inputArea = chatWidget.shadowRoot.querySelector('.lc_text-widget_input-area--root');
+                        if (inputArea) {
+                            inputArea.style.position = 'relative';
+                            inputArea.style.bottom = '0';
+                            inputArea.style.width = '100%';
+                            inputArea.style.boxSizing = 'border-box';
+                            inputArea.style.flexShrink = '0';
+                        }
+                    }
+
+                    // Adjust for mobile screens to prevent scrolling between message area and input
+                    let style = document.createElement('style');
+                    style.textContent = `
+                        @media screen and (max-width: 768px) {
+                            .lc_text-widget_message--text,
+                            .lc_text-widget_input--root,
+                            .lc_text-widget_heading--text {
+                                font-size: 22px !important; /* Larger font size for mobile */
+                                line-height: 1.5 !important; /* Better line spacing */
+                            }
+
+                            #lc_text-widget--box {
+                                height: 80% !important; /* Reduce height on mobile */
+                            }
+
+                            .lc_text-widget_message-area--root {
+                                max-height: 70% !important; /* Adjust message area */
+                                overflow-y: scroll;
+                            }
+
+                            .lc_text-widget_input-area--root {
+                                position: fixed !important;
+                                bottom: 0;
+                                width: 100%;
+                                max-height: 30% !important; /* Prevent input area from taking too much space */
+                                box-sizing: border-box;
+                                flex-shrink: 0;
+                            }
+                        }
+                    `;
+                    chatWidget.shadowRoot.appendChild(style);
+
+                    clearInterval(checkInterval);
+                }
+            }
+        }
+
+        // Set an interval to repeatedly check if the chat widget is loaded and adjust it
+        let checkInterval = setInterval(adjustChatWidget, 100); // Check every 100ms
     });
-  </script>
-</body>
-</html>
+</script>
