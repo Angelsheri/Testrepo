@@ -102,33 +102,61 @@
                         }
                     }
 
-                    // Adjust for mobile screens to prevent scrolling between message area and input
+                    // Ensure full responsiveness for mobile and tablet screens
                     let style = document.createElement('style');
                     style.textContent = `
-                        @media screen and (max-width: 768px) {
+                        @media screen and (max-width: 1024px) {
                             .lc_text-widget_message--text,
                             .lc_text-widget_input--root,
                             .lc_text-widget_heading--text {
-                                font-size: 22px !important; /* Larger font size for mobile */
-                                line-height: 1.5 !important; /* Better line spacing */
+                                font-size: 18px !important; /* Optimized font size for tablets */
+                                line-height: 1.4 !important;
                             }
 
                             #lc_text-widget--box {
-                                height: 80% !important; /* Reduce height on mobile */
+                                height: 100% !important; /* Fill most of the screen on tablets */
                             }
 
                             .lc_text-widget_message-area--root {
-                                max-height: 70% !important; /* Adjust message area */
-                                overflow-y: scroll;
+                                max-height: 100% !important;
+                                overflow-y: auto;
                             }
 
                             .lc_text-widget_input-area--root {
                                 position: fixed !important;
                                 bottom: 0;
                                 width: 100%;
-                                max-height: 30% !important; /* Prevent input area from taking too much space */
+                                padding: 10px;
                                 box-sizing: border-box;
-                                flex-shrink: 0;
+                                background-color: #fff; /* Prevent overlap */
+                            }
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            .lc_text-widget_message--text,
+                            .lc_text-widget_input--root,
+                            .lc_text-widget_heading--text {
+                                font-size: 16px !important; /* Optimized font size for mobile */
+                                line-height: 1.4 !important;
+                            }
+
+                            #lc_text-widget--box {
+                                height: 100% !important; /* Fill most of the screen on mobile */
+                            }
+
+                            .lc_text-widget_message-area--root {
+                                max-height: 85% !important; /* Adjust message area on mobile */
+                                overflow-y: auto;
+                            }
+
+                            .lc_text-widget_input-area--root {
+                                height: auto;
+                                position: fixed !important;
+                                bottom: 0;
+                                width: 100%;
+                                padding: 8px;
+                                box-sizing: border-box;
+                                background-color: #fff; /* Prevent overlap with messages */
                             }
                         }
                     `;
