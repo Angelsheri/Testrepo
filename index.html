@@ -1,24 +1,6 @@
-<div id="chat-widget-container" style="position: relative; width: 100%; height: 200px; overflow: hidden; border: 1px solid #dfdfdf; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.09); border-radius: 7px;">
-    <style>
-        /* Responsive adjustments for mobile screens */
-        @media screen and (max-width: 768px) {
-            #chat-widget-container {
-                width: 100%; /* Ensure full width on mobile */
-                height: 40vh; /* Adjust height to 90% of the viewport height */
-                border-radius: 5px; /* Slightly reduce border radius for mobile */
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07); /* Softer shadow on mobile */
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            #chat-widget-container {
-                height: 40vh; /* Further reduce height on very small screens */
-                border-radius: 3px; /* Smaller border radius on very small screens */
-            }
-        }
-    </style>
-
+<div id="chat-widget-container" style="position: relative; width: 50px; height: 50px; overflow: hidden;">
     <chat-widget
+        class="custom-chat-widget"  
         ack-icon="MessageDotsCircle"
         ack-placeholder-color="#000000FF"
         agency-name=""
@@ -30,21 +12,19 @@
         default-widget="true"
         enable-revisit-message="false"
         heading="Have any questions?"
-        height="100%"
         is-prompt-avatar-image-optimize="true"
         legal-msg="By submitting you agree to receive SMS or e-mails for the provided channel. Rates may be applied."
         live-chat-ack-msg="Your chat has ended"
         live-chat-end-msg="To start a new chat,"
         live-chat-feedback-msg="Please rate your experience."
-        live-chat-feedback-note="Thank you, for taking your time."
+        live-chat-feedback-note="Thank you for taking your time."
         live-chat-intro-msg="Give us a minute to assign you the best person to help you out."
-        live-chat-user-inactive-msg="Looks like it's taking too long. Please leave your contact details. We will get back to you shortly"
+        live-chat-user-inactive-msg="Looks like it's taking too long. Please leave your contact details. We will get back to you shortly."
         live-chat-user-inactive-time="15"
-        live-chat-visitor-inactive-msg="Chat closed due to user inactivity"
+        live-chat-visitor-inactive-msg="Chat closed due to user inactivity."
         live-chat-visitor-inactive-time="15"
         locale="en-us"
         location-id="LdcuiH328WKijRn8EJ4u"
-        position="static"
         primary-color="#188bf6"
         prompt-avatar="https://widgets.leadconnectorhq.com/chat-widget/assets/defaultAvatar.png"
         prompt-avatar-alt-text="Avatar"
@@ -60,8 +40,9 @@
         src="https://widgets.leadconnectorhq.com/loader.js"
         sub-heading="Hi there! Mary here. How can I help you today? Want info on our AI services, schedule a call, or get a free custom AI demo for your business?"
         success-msg="One of our representatives will contact you shortly."
-        thank-you-msg="Thank you!"
-        width="100%"
+        thank-you-msg="Thank You!"
+        width="50px"   <!-- Added width directly -->
+        height="50px"  <!-- Added height directly -->
         theme="{
             &quot;name&quot;: &quot;custom&quot;,
             &quot;colors&quot;: {
@@ -84,54 +65,67 @@
                     &quot;welcomeMessageTextColor&quot;: &quot;#000000FF&quot;
                 }
             }
-        }"
-    ></chat-widget>
+        }">
+    </chat-widget>
 </div>
 
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="66a7fe4e9fe0b459b86aabb7"></script>
+
+<!-- Add your custom styles -->
+<style>
+    .custom-chat-widget {
+        width: 50px !important;   /* Ensuring width is set */
+        height: 50px !important;  /* Ensuring height is set */
+        overflow: hidden;
+    }
+</style>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         function adjustChatWidget() {
             let chatWidget = document.querySelector('chat-widget');
+            let container = document.getElementById('chat-widget-container');
+
             if (chatWidget && chatWidget.shadowRoot) {
                 let widgetElement = chatWidget.shadowRoot.querySelector('#lc_text-widget');
                 if (widgetElement) {
-                    // Make the widget fill the iframe and make it responsive
-                    widgetElement.style.position = 'absolute';
-                    widgetElement.style.top = '0';
-                    widgetElement.style.left = '0';
+                    // Set the chat widget inside a fixed-size container (50x50px)
+                    container.style.width = '50px';
+                    container.style.height = '50px';
+                    container.style.overflow = 'hidden';
+                    container.style.position = 'relative';
+
+                    // Force the widget to fit into the container
                     widgetElement.style.width = '100%';
                     widgetElement.style.height = '100%';
+                    widgetElement.style.overflow = 'hidden';
 
-                    // Hide the header
+                    // Hide unnecessary elements like the header
                     let headerElement = chatWidget.shadowRoot.querySelector('.lc_text-widget_heading--root');
                     if (headerElement) {
                         headerElement.style.display = 'none';
                     }
 
-                    // Hide the button and open the chat automatically
+                    // Automatically open the chat without showing the button
                     let button = chatWidget.shadowRoot.querySelector('#lc_text-widget--btn');
                     if (button) {
                         button.click();
                         button.style.display = 'none';
                     }
 
-                    // Ensure the chat box fills the container and keeps the input area visible
+                    // Adjust the message box for compact display
                     let boxElement = chatWidget.shadowRoot.querySelector('#lc_text-widget--box');
                     if (boxElement) {
                         boxElement.style.borderRadius = '7px';
-                        boxElement.style.overflow = 'hidden'; // No scrollbar
                         boxElement.style.height = '100%';
-                        boxElement.style.maxHeight = '100%';
                         boxElement.style.display = 'flex';
                         boxElement.style.flexDirection = 'column';
 
-                        // Ensure the message area doesn't scroll
+                        // Ensure message area scrolls and input area stays fixed
                         let messageArea = chatWidget.shadowRoot.querySelector('.lc_text-widget_message-area--root');
                         if (messageArea) {
                             messageArea.style.flexGrow = '1';
-                            messageArea.style.overflow = 'hidden'; // Hide the scrollbar
+                            messageArea.style.overflowY = 'auto';
                         }
 
                         let inputArea = chatWidget.shadowRoot.querySelector('.lc_text-widget_input-area--root');
@@ -139,34 +133,31 @@
                             inputArea.style.position = 'relative';
                             inputArea.style.bottom = '0';
                             inputArea.style.width = '100%';
-                            inputArea.style.boxSizing = 'border-box';
-                            inputArea.style.flexShrink = '0';
                         }
                     }
 
-                    // Apply larger font sizes for mobile screens and adjust height for mobile
+                    // Apply responsive adjustments if needed
                     let style = document.createElement('style');
                     style.textContent = `
                         @media screen and (max-width: 768px) {
-                            #chat-widget-container {
-                                height: 80vh !important; /* Adjust height for mobile */
-                            }
                             .lc_text-widget_message--text,
                             .lc_text-widget_input--root,
                             .lc_text-widget_heading--text {
-                                font-size: 22px !important; /* Larger font size for mobile */
-                                line-height: 1.5 !important; /* Better line spacing */
+                                font-size: 14px !important;
+                            }
+                            #lc_text-widget {
+                                height: auto;
                             }
                         }
                     `;
                     chatWidget.shadowRoot.appendChild(style);
 
-                    clearInterval(checkInterval);
+                    clearInterval(checkInterval); // Stop interval once the widget is adjusted
                 }
             }
         }
 
-        // Set an interval to repeatedly check if the chat widget is loaded and adjust it
-        let checkInterval = setInterval(adjustChatWidget, 100); // Check every 100ms
+        // Check if the chat widget is loaded and adjust
+        let checkInterval = setInterval(adjustChatWidget, 100); 
     });
 </script>
