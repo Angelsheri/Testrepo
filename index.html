@@ -1,24 +1,68 @@
-<div id="chat-widget-container"
-    style="position: relative; width: 100%; height: 100%; overflow: hidden; border: 1px solid #dfdfdf; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.09); border-radius: 7px;">
-    <chat-widget ack-icon="MessageDotsCircle" ack-placeholder-color="#000000FF" agency-name="" agency-website=""
-        allow-avatar-image="false" auto-country-code="true" chat-icon="messageSquare" chat-type="liveChat"
-        default-widget="true" enable-revisit-message="false" heading="Have any questions?" height="100%"
+<div id="chat-widget-container" style="position: relative; width: 100%; height: 100%; overflow: hidden; border: 1px solid #dfdfdf; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.09); border-radius: 7px;">
+    <style>
+        /* Responsive adjustments for mobile screens */
+        @media screen and (max-width: 768px) {
+            #chat-widget-container {
+                width: 100%; /* Ensure full width on mobile */
+                height: 90vh; /* Adjust height to 90% of the viewport height */
+                border-radius: 5px; /* Slightly reduce border radius for mobile */
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07); /* Softer shadow on mobile */
+            }
+        }
+    
+        @media screen and (max-width: 480px) {
+            #chat-widget-container {
+                height: 80vh; /* Further reduce height on very small screens */
+                border-radius: 3px; /* Smaller border radius on very small screens */
+            }
+        }
+    </style>
+    
+    
+    <chat-widget
+        ack-icon="MessageDotsCircle"
+        ack-placeholder-color="#000000FF"
+        agency-name=""
+        agency-website=""
+        allow-avatar-image="false"
+        auto-country-code="true"
+        chat-icon="messageSquare"
+        chat-type="liveChat"
+        default-widget="true"
+        enable-revisit-message="false"
+        heading="Have any questions?"
+        height="100%"
         is-prompt-avatar-image-optimize="true"
         legal-msg="By submitting you agree to receive SMS or e-mails for the provided channel. Rates may be applied."
-        live-chat-ack-msg="Your chat has ended" live-chat-end-msg="To start a new chat,"
-        live-chat-feedback-msg="Please rate your experience." live-chat-feedback-note="Thank you, for taking your time."
+        live-chat-ack-msg="Your chat has ended"
+        live-chat-end-msg="To start a new chat,"
+        live-chat-feedback-msg="Please rate your experience."
+        live-chat-feedback-note="Thank you, for taking your time."
         live-chat-intro-msg="Give us a minute to assign you the best person to help you out."
         live-chat-user-inactive-msg="Looks like it's taking too long. Please leave your contact details. We will get back to you shortly"
-        live-chat-user-inactive-time="15" live-chat-visitor-inactive-msg="Chat closed due to user Inactivity"
-        live-chat-visitor-inactive-time="15" locale="en-us" location-id="LdcuiH328WKijRn8EJ4u" position="static"
-        primary-color="#188bf6" prompt-avatar="https://widgets.leadconnectorhq.com/chat-widget/assets/defaultAvatar.png"
-        prompt-avatar-alt-text="Avatar" prompt-msg="Hi there, have a question? Let's chat here!" prompt-type="normal"
+        live-chat-user-inactive-time="15"
+        live-chat-visitor-inactive-msg="Chat closed due to user Inactivity"
+        live-chat-visitor-inactive-time="15"
+        locale="en-us"
+        location-id="LdcuiH328WKijRn8EJ4u"
+        position="static"
+        primary-color="#188bf6"
+        prompt-avatar="https://widgets.leadconnectorhq.com/chat-widget/assets/defaultAvatar.png"
+        prompt-avatar-alt-text="Avatar"
+        prompt-msg="Hi there, have a question? Let's chat here!"
+        prompt-type="normal"
         resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-        revisit-prompt-msg="Welcome back {{ name }}, how can we help you today?" send-label="Send"
-        show-agency-branding="false" show-consent-checkbox="false" show-live-chat-welcome-msg="true" show-prompt="false"
+        revisit-prompt-msg="Welcome back {{ name }}, how can we help you today?"
+        send-label="Send"
+        show-agency-branding="false"
+        show-consent-checkbox="false"
+        show-live-chat-welcome-msg="true"
+        show-prompt="false"
         src="https://widgets.leadconnectorhq.com/loader.js"
         sub-heading="Hi there! Mary here. How can I help you today? Want info on our AI services, schedule a call, or get a free custom AI demo for your business?"
-        success-msg="One of our representatives will contact you shortly." thank-you-msg="Thank You!" width="100%"
+        success-msg="One of our representatives will contact you shortly."
+        thank-you-msg="Thank You!"
+        width="100%"
         theme="{
             &quot;name&quot;: &quot;custom&quot;,
             &quot;colors&quot;: {
@@ -41,12 +85,11 @@
                     &quot;welcomeMessageTextColor&quot;: &quot;#000000FF&quot;
                 }
             }
-        }"></chat-widget>
+        }"
+    ></chat-widget>
 </div>
 
-<script src="https://widgets.leadconnectorhq.com/loader.js"
-    data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-    data-widget-id="66a7fe4e9fe0b459b86aabb7"></script>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="66a7fe4e9fe0b459b86aabb7"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -102,61 +145,18 @@
                         }
                     }
 
-                    // Ensure full responsiveness for mobile and tablet screens
+                    // Apply larger font sizes for mobile screens and adjust height for mobile
                     let style = document.createElement('style');
                     style.textContent = `
-                        @media screen and (max-width: 1024px) {
-                            .lc_text-widget_message--text,
-                            .lc_text-widget_input--root,
-                            .lc_text-widget_heading--text {
-                                font-size: 18px !important; /* Optimized font size for tablets */
-                                line-height: 1.4 !important;
-                            }
-
-                            #lc_text-widget--box {
-                                height: 100% !important; /* Fill most of the screen on tablets */
-                            }
-
-                            .lc_text-widget_message-area--root {
-                                max-height: 100% !important;
-                                overflow-y: auto;
-                            }
-
-                            .lc_text-widget_input-area--root {
-                                position: fixed !important;
-                                bottom: 0;
-                                width: 100%;
-                                padding: 10px;
-                                box-sizing: border-box;
-                                background-color: #fff; /* Prevent overlap */
-                            }
-                        }
-
                         @media screen and (max-width: 768px) {
+                            #chat-widget-container {
+                                height: 80vh !important; /* Adjust height for mobile */
+                            }
                             .lc_text-widget_message--text,
                             .lc_text-widget_input--root,
                             .lc_text-widget_heading--text {
-                                font-size: 16px !important; /* Optimized font size for mobile */
-                                line-height: 1.4 !important;
-                            }
-
-                            #lc_text-widget--box {
-                                height: 100% !important; /* Fill most of the screen on mobile */
-                            }
-
-                            .lc_text-widget_message-area--root {
-                                max-height: 85% !important; /* Adjust message area on mobile */
-                                overflow-y: auto;
-                            }
-
-                            .lc_text-widget_input-area--root {
-                                height: auto;
-                                position: fixed !important;
-                                bottom: 0;
-                                width: 100%;
-                                padding: 8px;
-                                box-sizing: border-box;
-                                background-color: #fff; /* Prevent overlap with messages */
+                                font-size: 22px !important; /* Larger font size for mobile */
+                                line-height: 1.5 !important; /* Better line spacing */
                             }
                         }
                     `;
