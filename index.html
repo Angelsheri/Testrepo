@@ -9,7 +9,7 @@
                 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07); /* Softer shadow on mobile */
             }
         }
-    
+
         @media screen and (max-width: 480px) {
             #chat-widget-container {
                 height: 80vh; /* Further reduce height on very small screens */
@@ -17,8 +17,7 @@
             }
         }
     </style>
-    
-    
+
     <chat-widget
         ack-icon="MessageDotsCircle"
         ack-placeholder-color="#000000FF"
@@ -41,7 +40,7 @@
         live-chat-intro-msg="Give us a minute to assign you the best person to help you out."
         live-chat-user-inactive-msg="Looks like it's taking too long. Please leave your contact details. We will get back to you shortly"
         live-chat-user-inactive-time="15"
-        live-chat-visitor-inactive-msg="Chat closed due to user Inactivity"
+        live-chat-visitor-inactive-msg="Chat closed due to user inactivity"
         live-chat-visitor-inactive-time="15"
         locale="en-us"
         location-id="LdcuiH328WKijRn8EJ4u"
@@ -61,7 +60,7 @@
         src="https://widgets.leadconnectorhq.com/loader.js"
         sub-heading="Hi there! Mary here. How can I help you today? Want info on our AI services, schedule a call, or get a free custom AI demo for your business?"
         success-msg="One of our representatives will contact you shortly."
-        thank-you-msg="Thank You!"
+        thank-you-msg="Thank you!"
         width="100%"
         theme="{
             &quot;name&quot;: &quot;custom&quot;,
@@ -122,17 +121,17 @@
                     let boxElement = chatWidget.shadowRoot.querySelector('#lc_text-widget--box');
                     if (boxElement) {
                         boxElement.style.borderRadius = '7px';
-                        boxElement.style.overflow = 'hidden';
+                        boxElement.style.overflow = 'hidden'; // No scrollbar
                         boxElement.style.height = '100%';
                         boxElement.style.maxHeight = '100%';
                         boxElement.style.display = 'flex';
                         boxElement.style.flexDirection = 'column';
 
-                        // Ensure the message area is scrollable and the input area stays visible
+                        // Ensure the message area doesn't scroll
                         let messageArea = chatWidget.shadowRoot.querySelector('.lc_text-widget_message-area--root');
                         if (messageArea) {
                             messageArea.style.flexGrow = '1';
-                            messageArea.style.overflowY = 'auto';
+                            messageArea.style.overflow = 'hidden'; // Hide the scrollbar
                         }
 
                         let inputArea = chatWidget.shadowRoot.querySelector('.lc_text-widget_input-area--root');
